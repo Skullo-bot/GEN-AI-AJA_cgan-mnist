@@ -1,0 +1,37 @@
+# =====================================================================
+# .gitignore — Proyek Conditional GAN Klasik (MNIST)
+# Penanggung Jawab: Anggota 1 (Dil - Ketua & Prompt Engineer)
+# =====================================================================
+
+# 1. Byte-compiled / cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 2. Virtual Environment (agar tiap anggota bisa pakai env lokalnya sendiri)
+.venv/
+venv/
+env/
+ENV/
+
+# 3. Dataset mentah MNIST (diunduh otomatis via data.py)
+dataset/*
+!dataset/.gitkeep
+
+# 4. File bobot model berukuran besar (.pth / .pt) di dalam outputs/checkpoints/
+# Catatan: sampel gambar (.png), plot (.png), dan log (.csv) tetap bisa di-commit
+# sebagai bukti luaran eksperimen kelompok, sedangkan file .gitkeep tetap dijaga.
+outputs/checkpoints/*.pth
+outputs/checkpoints/*.pt
+!outputs/checkpoints/.gitkeep
+
+# 5. Cache Jupyter Notebook & IDE (jika anggota melakukan uji coba lokal)
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# 6. File sistem operasi (Windows / macOS)
+Thumbs.db
+Desktop.ini
+.DS_Store
