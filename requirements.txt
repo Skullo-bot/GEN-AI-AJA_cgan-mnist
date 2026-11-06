@@ -1,0 +1,13 @@
+# =====================================================================
+# Dependensi Proyek: Conditional GAN Klasik (MNIST) - Vibe Coding
+# =====================================================================
+# Framework Utama Deep Learning & Dataset
+torch>=2.0.0
+torchvision>=0.15.0
+# Visualisasi Metrik & Grid Gambar Sampel
+matplotlib>=3.7.0
+# Manipulasi Numerik & Riwayat Metrik Training
+numpy>=1.24.0
+pandas>=2.0.0
+# Indikator Progress Training Loop
+tqdm>=4.65.0
