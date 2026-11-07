@@ -50,7 +50,7 @@
 
 - **Pesan Eror dari Notebook/Terminal:**
   ```text
-  [tempel pesan eror utuh di sini, atau output sanity check jika berhasil]
+  [MNIST akan terunduh otomatis ke folder dataset/.]
   ```
 - **Prompt Perbaikan ke LLM:** "[tulis prompt yang kamu kirim ke LLM untuk memperbaiki eror]"
 - **Analisis & Solusi Kelompok:** [jelaskan penyebab eror dan perbaikannya]
@@ -60,11 +60,49 @@
 ## HASIL UJI (diisi setelah menjalankan)
 
 ```text
-[tempel output `python data.py` di sini]
+[
+  [100% 9.91M/9.91M [00:00<00:00, 18.3MB/s]
+  100% 28.9k/28.9k [00:00<00:00, 484kB/s]
+  100% 1.65M/1.65M [00:00<00:00, 4.63MB/s]
+  100% 4.54k/4.54k [00:00<00:00, 18.9MB/s]
+  === SANITY CHECK: data.py ===
+  Jumlah data latih      : 60,000 citra (937 batch)
+  Jumlah data uji        : 10,000 citra (157 batch)
+  Shape batch images     : [64, 1, 28, 28]  (Target: [64, 1, 28, 28])
+  Shape batch labels     : [64]  (Target: [64])
+  Tipe data images/label : torch.float32 / torch.int64
+  Rentang piksel         : [-1.000, 1.000]  (Target: [-1, 1])
+  Mean / Std batch       : -0.742 / 0.614
+  Label pada batch ini   : [8, 1, 4, 6, 3, 4, 0, 2, 7, 6, 4, 0, 3, 1, 5, 6] ...
+  Distribusi kelas (data latih):
+  Digit 0:  5923 ( 9.87%)
+  Digit 1:  6742 (11.24%)
+  Digit 2:  5958 ( 9.93%)
+  Digit 3:  6131 (10.22%)
+  Digit 4:  5842 ( 9.74%)
+  Digit 5:  5421 ( 9.04%)
+  Digit 6:  5918 ( 9.86%)
+  Digit 7:  6265 (10.44%)
+  Digit 8:  5851 ( 9.75%)
+  Digit 9:  5949 ( 9.91%)
+  Reprodusibel (seed 42) : True
+  Batch augmentasi       : [8, 1, 28, 28] -> VALID
+  Pratinjau disimpan     : /content/GEN-AI-AJA_cgan-mnist/outputs/samples/real_mnist_preview.png
+  Status                 : Data pipeline MNIST VALID & siap dipakai train.py!]
+]
 ```
 
 ```text
-[tempel output `python verify_integration.py` di sini — status data harus "AKTIF (DataLoader Anggota 2 terdeteksi)"]
+[
+  === VERIFIKASI INTEGRASI MODUL cGAN MNIST ===
+  Device Eksekusi       : cuda
+  Status Modul data.py  : AKTIF (DataLoader Anggota 2 terdeteksi)
+  Shape Citra Real/Fake : [8, 1, 28, 28] / [8, 1, 28, 28]
+  Rentang Piksel Fake   : [-0.682, 0.649]
+  Shape Output Logit D  : [8, 1]
+  Uji Hitung Loss D & G : Loss_D = 0.9063 | Loss_G = 0.8154
+  Status Integrasi      : SELURUH KONTRAK SHAPE & BACKPROPAGATION VALID!
+]
 ```
 
 Pratinjau data: `outputs/samples/real_mnist_preview.png`
