@@ -14,10 +14,10 @@
 ### 1. TAHAP INISIASI (Meminta Kode Awal)
 
 - **Prompt Kelompok:**
-  > "Saya adalah anggota dua (2), coba tolong kerjakan apa yang seharusnya jadi tugas saya, bisa dilihat di GitHub tersebut untuk file pengerjaan." (disertai panduan proyek dan tautan repositori kelompok)
+  > "Kamu adalah mentor ahli Deep Learning & Data Engineering (PyTorch) yang mendampingi saya, Anggota 2 (Data Pipeline & Preprocessing Engineer), dalam proyek kelompok mata kuliah Generative AI (CAK4KBB3) dengan topik: Conditional GAN Klasik untuk MNIST (angka tulisan tangan 0–9) menggunakan metode Vibe Coding. Berdasarkan kontrak variabel di `config.py` milik Anggota 1 (`DATA_DIR`, `IMG_SIZE=28`, `IMG_CHANNELS=1`, `NUM_CLASSES=10`, `NORM_MEAN=(0.5,)`, `NORM_STD=(0.5,)`, `BATCH_SIZE=64`, `NUM_WORKERS=0`, `SEED=42`, `ensure_directories`), buatkan modul `data.py` secara modular tanpa angka hardcode yang mencakup: (1) `get_mnist_transforms(augment=False)` dengan normalisasi ke `[-1, 1]` dan opsi augmentasi ringan `RandomAffine`, (2) `get_mnist_dataset(train, augment)` untuk mengunduh/memuat MNIST ke `DATA_DIR`, (3) `get_dataloader(batch_size, train, augment, num_workers)` dengan `torch.Generator` ber-seed 42 serta `shuffle=True` dan `drop_last=True` khusus data latih, (4) `get_class_distribution(dataset)` untuk menghitung distribusi kelas digit 0–9, (5) `validate_batch(images, labels)` untuk assert dimensi `[B, 1, 28, 28]` float32 di `[-1, 1]` dan label `[B]` int64, (6) `save_real_preview(...)` ke `outputs/samples/real_mnist_preview.png`, serta blok sanity check pada `if __name__ == '__main__':`."
 
 - **Alasan Khusus:**
-  LLM diberi akses ke repositori agar membaca langsung kontrak dari Anggota 1 (`config.py`, `models.py`, `verify_integration.py`, dan system prompt Anggota 2 di `docs/system_prompt.md`). Dengan begitu `data.py` tidak memakai angka hardcode dan shape-nya pasti cocok dengan Generator/Discriminator.
+  Menggunakan spesifikasi dari `docs/system_prompt.md` (Anggota 2) dan mengikat kontrak langsung ke `config.py`, `models.py`, serta `verify_integration.py` milik Anggota 1. Dengan merinci ke-6 fungsi (`get_mnist_transforms`, `get_mnist_dataset`, `get_dataloader`, `get_class_distribution`, `validate_batch`, dan `save_real_preview`), modul `data.py` bebas dari angka *hardcode*, menjaga reprodusibilitas urutan batch dengan `SEED=42`, mencegah eror `BatchNorm1d` melalui `drop_last=True`, serta memastikan rentang piksel `[-1, 1]` selaras dengan aktivasi `Tanh` pada Generator.
 
 - **Output Model (ringkasan):**
   | Fungsi | Kegunaan |

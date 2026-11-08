@@ -5,12 +5,13 @@
 - **Mata Kuliah:** Generative AI (CAK4KBB3)
 - **Topik Proyek:** Conditional GAN Klasik untuk MNIST (angka tulisan tangan 0–9)
 - **Anggota:** Anggota 1 — Dil (Ketua: Prompt Engineer & LLM Navigator)
-- **Target Modul:** `.gitignore`, `requirements.txt`, `README.md`, `config.py`, `docs/system_prompt.md`, `models.py`, `verify_integration.py`, `generate.py`
+- **Target Modul:** `system_prompt_anggota1_cgan.md`, `.gitignore`, `requirements.txt`, `README.md`, `config.py`, `docs/system_prompt.md`, `models.py`, `verify_integration.py`, `generate.py`
 - **Rentang Sesi:** 06/11/2026 – 08/11/2026
 
 ---
 
 ## DAFTAR ISI KRONOLOGI SESI
+0. [Sesi 0 (Pra-Inisiasi): Studi Materi Kuliah (PPT GEN01–GEN07), Kelayakan Topik cGAN MNIST, & Pembuatan System Prompt Awal](#sesi-0-pra-inisiasi-studi-materi-kuliah-ppt-gen01gen07-kelayakan-topik-cgan-mnist--pembuatan-system-prompt-awal)
 1. [Sesi 1: Inisiasi System Prompt & Kontrak Kerja LLM](#sesi-1-inisiasi-system-prompt--kontrak-kerja-llm)
 2. [Sesi 2: Penyelarasan Pedoman Proyek & Rubrik Penilaian](#sesi-2-penyelarasan-pedoman-proyek--rubrik-penilaian)
 3. [Sesi 3: Perancangan Struktur Direktori & Inisialisasi Berkas Kosong](#sesi-3-perancangan-struktur-direktori--inisialisasi-berkas-kosong)
@@ -21,6 +22,92 @@
 8. [Sesi 8: Implementasi Arsitektur cGAN (`models.py`)](#sesi-8-implementasi-arsitektur-cgan-modelspy)
 9. [Sesi 9: Implementasi Skrip Uji Integrasi (`verify_integration.py`)](#sesi-9-implementasi-skrip-uji-integrasi-verify_integrationpy)
 10. [Sesi 10: Implementasi Modul Inferensi (`generate.py`) & Validasi Visual Pra-Pelatihan](#sesi-10-implementasi-modul-inferensi-generatepy--validasi-visual-pra-pelatihan)
+11. [Sesi 11: Review Kualitas & Penyelarasan Log Interaksi Anggota 2 (`data.py`)](#sesi-11-review-kualitas--penyelarasan-log-interaksi-anggota-2-datapy)
+
+---
+
+## Sesi 0 (Pra-Inisiasi): Studi Materi Kuliah (PPT GEN01–GEN07), Kelayakan Topik cGAN MNIST, & Pembuatan System Prompt Awal
+**Tanggal:** 06/11/2026
+
+### 👤 Prompt 0.1 — Anggota 1 (Dil):
+> *"pelajari ini secara keseluruhan dan ingat aturan yang ada PANDUAN PROYEK KELOMPOK: VIBE CODING GENERATIVE AI FROM SCRATCH [Menyertakan seluruh isi panduan proyek: 1. Instruksi Pelaksanaan, 2. Pembagian Tugas Kelompok 4 Anggota, 3. Pilihan Metode dan Arsitektur Model, 4. Rubrik Penilaian 100 Poin, dan 5. Template Log Interaksi LLM]. pelajari juga folder ppt"*
+
+### 🤖 Respons LLM 0.1:
+Saya telah mempelajari dan memahami secara menyeluruh **Panduan Proyek Kelompok: Vibe Coding Generative AI from Scratch** beserta materi perkuliahan pada folder **PPT** mata kuliah Generative AI (CAK4KBB3).
+
+Berikut adalah ringkasan aturan baku, struktur tim, pemetaan materi kuliah, dan komitmen peran saya sebagai mitra AI Anda:
+
+#### 1. Aturan Kunci Proyek (*Rules of Engagement*)
+- **Dilarang Copy-Paste Tutorial:** Tidak boleh menyalin kode dari blog atau repositori GitHub orang lain. Pustaka resmi (PyTorch/TensorFlow) hanya untuk fungsi primitif/dasar. Arsitektur dan alur dibangun *from scratch* via prompting terarah (*Vibe Coding*).
+- **Dokumentasi & Log Interaksi Wajib (Bobot 25%):** Setiap percakapan, inisiasi modul, pesan eror/debugging, hingga optimasi harus tercatat rapi sesuai format standar template log (Inisiasi $\rightarrow$ Debugging $\rightarrow$ Solusi).
+- **Pembagian Kerja 4 Anggota Jelas (Bobot 20%):**
+  - **Anggota 1 (Lead & Prompt Engineer):** Mengarahkan arsitektur, system prompt, dan konsistensi logika model.
+  - **Anggota 2 (Data Pipeline Engineer):** Dataset, augmentasi, normalisasi, DataLoader, serta validasi dimensi tensor masukan (*tensor shapes*).
+  - **Anggota 3 (Training & Tuning Engineer):** Custom loss function, epoch training loop, hyperparameter tuning (LR, batch size), dan grafik evaluasi/metrik.
+  - **Anggota 4 (Doc Lead & Error Handler):** Rekap log interaksi, perumusan prompt pesan eror ke AI, dan penyusunan laporan akhir.
+- **Fungsionalitas & Metrik Valid (Bobot 25% + 30% Orisinalitas):** Model harus berhasil dilatih tanpa eror, menghasilkan visualisasi/metrik konvergensi yang masuk akal, serta kode modular dan bersih.
+
+#### 2. Keterkaitan Materi Folder PPT dengan Pilihan Arsitektur Proyek
+Berdasarkan berkas materi perkuliahan di folder PPT:
+- **GEN01 (Pengenalan Model Generatif):** Konsep $P(x)$ vs $P(y|x)$, model generatif tak terkondisi vs terkondisi (dasar cGAN, VAE, DDPM).
+- **GEN02 (Review RNN & CNN):** Kerangka dasar Encoder-Decoder untuk data teks dan citra (fondasi Autoencoder & Image Captioning).
+- **GEN03 (Autoregressive Models):** Pemodelan sekuensial prediksi berantai, RNN, PixelRNN/PixelCNN (fondasi Mini-Transformer / GPT minimalis).
+- **GEN04 & GEN05 (Feature Visualization, Deep Dream, & Neural Style Transfer):** Ekstraksi fitur CNN, Gram Matrix, penghitungan Content Loss dan Style Loss berbasis VGG-19 untuk optimasi gambar.
+- **GEN06 (Variational Autoencoder - VAE):** Representasi ruang laten probabilistik (Gaussian prior), Reparameterization Trick, perumusan loss gabungan (Reconstruction Loss + KL Divergence / ELBO).
+- **GEN07 (Generative Adversarial Network - GAN):** Permainan Minimax, fungsi loss BCE, dinamika pelatihan Generator vs Discriminator, arsitektur DCGAN, serta penanganan ketidakstabilan training (seperti *mode collapse*).
+
+#### 3. Peran Saya Selama Proyek Berjalan
+- **Pendekatan Modular & Bertahap:** Kita akan membangunnya lapis demi lapis (Data Pipeline $\rightarrow$ Arsitektur $\rightarrow$ Loss & Training Loop $\rightarrow$ Evaluasi).
+- **Kesesuaian Dimensi Tensor:** Selalu menyertakan penjelasan shape tensor (misal: `[B, C, H, W]`) agar Anggota 2 & 1 sinkron.
+- **Format Debugging Terstruktur:** Menjelaskan akar masalah, solusi, dan format siap pakai untuk log Anggota 4.
+
+---
+
+### 👤 Prompt 0.2 — Anggota 1 (Dil):
+> *"apakah Conditional GAN Klasik (MNIST — angka tulisan tangan 0–9) memenuhi persayaratan utk tugas tersebut?"*
+
+### 🤖 Respons LLM 0.2:
+**Ya, sangat memenuhi persyaratan!**
+
+Bahkan, **Conditional GAN Klasik** secara eksplisit tercantum dalam dokumen panduan resmi Anda pada bagian:
+> *3. Pilihan Metode dan Arsitektur Model $\rightarrow$ Generative Image & Computer Vision: Conditional GAN Klasik.*
+
+Berikut adalah analisis kelayakan dan strategi agar pilihan ini mendapatkan nilai optimal berdasarkan rubrik penilaian:
+
+#### 1. Mengapa Pilihan Ini Sangat Tepat?
+- **Sesuai Teori Perkuliahan:** Terkait erat dengan **GEN01** (pemodelan $P(x|y)$ *conditional generative*) dan **GEN07** (konsep Minimax game, Binary Cross-Entropy, dan kestabilan training GAN).
+- **Komputasi Ramah & Cepat Iterasi:** Dataset MNIST ($28\times28$, grayscale, 10 kelas) sangat ringan. Pelatihan dapat selesai dalam hitungan menit di CPU laptop maupun Google Colab gratis.
+- **Tantangan Teknis Nyata (Tidak Trivial):**
+  - **Penggabungan Dimensi (*Conditioning*):** Bagaimana menempelkan label kelas $y \in \{0, \dots, 9\}$ ke vektor laten noise $z$ pada Generator, serta menempelkannya ke matriks citra $x$ pada Discriminator (menggunakan `Embedding` layer).
+  - **Keseimbangan Minimax:** Menjaga agar Discriminator tidak terlalu cepat mendominasi Generator (*vanishing gradients*) atau terjadi *mode collapse*.
+
+#### 2. Pembagian Tugas (Job Desk 4 Anggota) pada cGAN MNIST
+| Peran | Tugas Spesifik pada Proyek cGAN MNIST |
+| :--- | :--- |
+| **Anggota 1 (Lead & Prompt)** | Merancang struktur arsitektur: menentukan dimensi laten $z$ (100), dimensi embedding label (50), dan arsitektur Generator vs Discriminator. Menjaga logika interaksi dengan AI. |
+| **Anggota 2 (Data Pipeline)** | Mengunduh MNIST via `torchvision.datasets`, normalisasi piksel ke $[-1, 1]$ (selaras dengan aktivasi `Tanh` pada Generator), membuat `DataLoader`, dan memverifikasi tensor shape `[B, 1, 28, 28]`. |
+| **Anggota 3 (Training & Tuning)** | Menyusun loop pelatihan terpisah antara update $D$ dan update $G$, fungsi loss `BCEWithLogitsLoss`, optimasi Adam ($lr=0.0002, \beta_1=0.5$), serta mencatat kurva loss $D$ vs $G$. |
+| **Anggota 4 (Doc & Error Handler)** | Menangkap error umum (misal: *shape mismatch* saat concatenate tensor label) ke dalam template log, serta mengompilasi laporan akhir dan visualisasi hasil generate angka 0 s.d. 9. |
+
+#### 3. Rekomendasi Teknis agar Nilai Maksimal (Bobot Orisinalitas & Kualitas 30%)
+- **Gunakan Konsep DCGAN (Bukan Sekadar MLP Biasa):** Bangun Generator menggunakan `ConvTranspose2d + BatchNorm2d + ReLU + Tanh`, dan Discriminator menggunakan `Conv2d + LeakyReLU + Dropout`.
+- **Kondisionalitas yang Rapi:**
+  - Untuk Generator: `nn.Embedding(10, embedding_dim)` digabung dengan `z` melalui `torch.cat`.
+  - Untuk Discriminator: Label di-embed menjadi feature map $1\times28\times28$ lalu di-*concatenate* sebagai channel ke-2 pada gambar input (`[B, 2, 28, 28]`).
+
+---
+
+### 👤 Prompt 0.3 — Anggota 1 (Dil):
+> *"buat lah prompt ahli untuk membantu saya mengerjakan Conditional GAN Klasik (MNIST — angka tulisan tangan 0–9) sebagai anggota 1 dan selalu sebut nama dil diawal dan ini aturan intinya kan 1. Instruksi Pelaksanaan • Dilarang Keras Copy-Paste Tutorial... • Dokumentasi Chat LLM... • Proses Debugging Mandiri... mulai dari awal tetapi tungu intruksi saya"*
+
+### 🤖 Respons LLM 0.3:
+Dil, prompt ahli untuk Anggota 1 sudah saya buat dan simpan di `system_prompt_anggota1_cgan.md`.
+
+Isinya mencakup:
+- **Aturan wajib:** setiap jawaban selalu diawali "Dil", AI hanya bergerak kalau Anda memberi instruksi, tidak boleh menyalin tutorial, setiap jawaban ditutup ringkasan untuk Log Interaksi, dan debugging dilakukan bersama (AI menjelaskan dulu akar masalahnya, baru memberi solusi).
+- **Konteks teknis:** MNIST `[B, 1, 28, 28]` dinormalisasi ke `[-1, 1]`, Generator dan Discriminator bergaya DCGAN dengan label sebagai kondisi, `BCEWithLogitsLoss`, dan Adam `2e-4`. Kodenya dipecah per modul: `config.py`, `data.py`, `models.py`, `train.py`, `utils.py`, `generate.py`.
+- **Peran Anggota 1:** menjaga logika dan ukuran tensor tetap konsisten antar anggota, serta memeriksa hasil penggabungan kode semua anggota.
+- **Penutup prompt:** AI cukup menjawab *"Dil, saya siap. Silakan berikan instruksi pertama."*, lalu menunggu.
 
 ---
 
@@ -34,7 +121,7 @@
 > • Proses Debugging Mandiri: Jika terjadi kesalahan/eror pada kode, mahasiswa harus mengonsultasikan pesan eror tersebut kepada LLM, menganalisis solusinya, dan mendokumentasikannya di Log Interaksi."*
 
 ### 🤖 Respons & Analisis LLM:
-- Menyepakati aturan main *Vibe Coding* bertahap (menunggu instruksi di setiap tahap, tidak membuat seluruh proyek sekaligus).
+- Merespons pembuka *"Dil, saya siap. Silakan berikan instruksi pertama."* sesuai aturan `system_prompt_anggota1_cgan.md`.
 - Mengunci 3 pedoman utama:
   1. **Orisinalitas Kode:** Dokumentasi resmi PyTorch hanya dipakai sebagai referensi fungsi dasar (`nn.Conv2d`, `nn.ConvTranspose2d`, `nn.Embedding`, dll.), bukan menyalin tutorial.
   2. **Kerapian Dokumentasi Chat:** Menyertakan blok *Log Interaksi LLM* di setiap akhir respons.
@@ -198,9 +285,23 @@
 
 ---
 
+## Sesi 11: Review Kualitas & Penyelarasan Log Interaksi Anggota 2 (`data.py`)
+**Tanggal:** 08/11/2026
+
+### 👤 Prompt Anggota 1 (Dil):
+> *"ini tidak pakai system prompt y? apakah lebih baik saya ganti prompt awalnya? [Menyertakan draf Log Interaksi LLM Anggota 2 beserta output sanity check data.py dan verify_integration.py]"*
+> *"apakah itu sudah disesuaikan dengan prompt anggota 2 di system prompt md?"*
+
+### 🤖 Respons & Analisis LLM:
+- Sebagai Ketua Kelompok, memvalidasi bahwa output eksekusi `data.py` dari Anggota 2 sudah **100% lolos uji integrasi** (`Status Modul data.py: AKTIF` pada `verify_integration.py`).
+- Menyelaraskan dokumentasi Log Interaksi Anggota 2 agar mencantumkan teks utuh **System Prompt — Anggota 2** dari `docs/system_prompt.md` (kata demi kata), diikuti prompt instruksi pembuatan `data.py`, serta melengkapi analisis teknis `drop_last=True` untuk mencegah eror `BatchNorm1d` pada bagian *Tahap Penanganan Eror / Debugging*.
+
+---
+
 ## REKAPITULASI CAPAIAN ANGGOTA 1 (DIL)
 | No | Nama Berkas | Status | Keterangan |
 | :-: | :--- | :---: | :--- |
+| 0 | `system_prompt_anggota1_cgan.md` | ✅ Selesai | Perumusan kontrak awal Anggota 1 berbasis materi kuliah GEN01–GEN07 |
 | 1 | `.gitignore` | ✅ Selesai | Filter cache Python, venv, dataset mentah, dan file bobot `.pth` |
 | 2 | `requirements.txt` | ✅ Selesai | Dependensi PyTorch, Torchvision, Matplotlib, NumPy, Pandas, tqdm |
 | 3 | `README.md` | ✅ Selesai | Identitas kelompok, arsitektur cGAN, dan panduan penggunaan |
