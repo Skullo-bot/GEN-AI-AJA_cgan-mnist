@@ -9,11 +9,10 @@ Model dikembangkan menggunakan paradigma **Vibe Coding from scratch**, berkolabo
 
 | Peran | Nama Anggota | NIM | Fokus & Tanggung Jawab |
 | :--- | :--- | :--- | :--- |
-| **Anggota 1** | **Dil** | [NIM-1] | Prompt Engineer & LLM Navigator (Arsitektur Model cGAN & Kontrak Kode) |
-| **Anggota 2** | **MUHAMMAD NAZRIEL IHRAM** | 103012300269 | Data Pipeline & Preprocessing Engineer (Dataset MNIST & DataLoader) |
-| **Anggota 3** | [Nama Anggota 3] | [NIM-3] | Training Loop & Hyperparameter Tuning Engineer (Loss & Optimasi) |
-| **Anggota 4** | [Nama Anggota 4] | [NIM-4] | Lead Documentarian & Error Handler (Log Interaksi, Debugging, & Laporan) |
-
+| **Anggota 1** | **Fadhil Abithyasa Effendi** | 103012330370 | Prompt Engineer & LLM Navigator (Arsitektur Model cGAN & Kontrak Kode) |
+| **Anggota 2** | **Muhammad Nazriel Ihram** | 103012300269 | Data Pipeline & Preprocessing Engineer (Dataset MNIST & DataLoader) |
+| **Anggota 3** | **Damar Muharram** | 103012300096 | Training Loop & Hyperparameter Tuning Engineer (Loss & Optimasi) |
+| **Anggota 4** | **Muhammad Furqan Maulidi** | 103012330213 | Lead Documentarian & Error Handler (Log Interaksi, Debugging, & Laporan) |
 ---
 
 ## 🧠 Konsep & Arsitektur Model
@@ -90,15 +89,26 @@ python verify_integration.py
 
 ### 4. Pelatihan Model (Training)
 ```bash
-python train.py
+python train.py --exp_name baseline
+python train.py --exp_name smooth --label_smoothing --compare_with baseline
+python train.py --exp_name ttur --lr_g 0.0002 --lr_d 0.0001 --compare_with baseline
+python train.py --exp_name smooth_ttur --label_smoothing --lr_g 0.0002 --lr_d 0.0001 --compare_with baseline smooth ttur
 ```
 
 ### 5. Generate Angka 0–9
 ```bash
-python generate.py
+python generate.py --checkpoint outputs/checkpoints/smooth_ttur/best.pth --digit 7
 ```
-
 ---
+
+## 📊 Hasil Eksperimen & Hyperparameter Tuning
+
+| Eksperimen | Learning Rate (G / D) | Label Smoothing | d_loss (Epoch 30) | g_loss (Epoch 30) | Analisis Singkat |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Baseline** | **0.0002 / 0.0002** | Tidak | 0.2323 | 3.1047 | Discriminator dominan G loss terus membengkak |
+| **Smooth** | **0.0002 / 0.0002** | Ya | 0.3462 | 2.6766 | Menahan Discriminator agar tidak terlalu yakin (overconfident) |
+| **TTUR** | **0.0002 / 0.0001** | Tidak | 1.9799 | 1.9799 | Menyeimbangkan ritme belajar g_loss turun signifikan (−36.2%) |
+| **Smooth + TTUR** | **0.0002 / 0.0001** | Ya | 0.4427 | 0.4427 | Performa paling stabil mendekati ekuilibrium ideal (ln2≈0.693) |
 
 ## 📜 Log Interaksi & Debugging LLM
 Riwayat interaksi dengan LLM, proses penanganan eror mandiri, serta tautan share chat dapat dilihat secara transparan pada folder [docs/](docs/).
