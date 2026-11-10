@@ -63,7 +63,7 @@ Pada proyek ini, model cGAN dibangun secara khusus untuk membangkitkan citra sin
 
 ## BAB 3: METODOLOGI PELATIHAN & EXPERIMENTAL DESIGN
 
-Pelatihan dijalankan selama 30 epoch pada setiap eksperimen menggunakan optimizer Adam (`beta1 = 0.5`, `beta2 = 0.999`) dan fungsi loss `BCEWithLogitsLoss`. Nilai loss Discriminator dihitung dari rata-rata loss citra asli dan citra palsu, yaitu `L_D = 0.5 * (L_real + L_fake)`, dengan titik keseimbangan ideal berada di kisaran `ln(2) ≈ 0.693`.
+Pelatihan dijalankan selama 30 epoch pada setiap eksperimen menggunakan optimizer Adam ($\beta_1 = 0.5$, $\beta_2 = 0.999$). Fungsi loss Discriminator ($D$) dihitung sebagai rata-rata loss citra asli dan citra palsu, yaitu $L_D = 0.5 \times (L_{\text{real}} + L_{\text{fake}})$, dengan titik keseimbangan ideal berada di kisaran $L_D \approx \ln(2) \approx 0.693$.
 
 Untuk mencari keseimbangan terbaik antara Generator dan Discriminator, dirancang 4 variasi eksperimen:
 
