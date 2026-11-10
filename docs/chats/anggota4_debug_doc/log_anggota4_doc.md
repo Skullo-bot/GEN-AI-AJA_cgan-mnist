@@ -1,13 +1,11 @@
 # LOG INTERAKSI LLM — KELOMPOK GEN-AI-AJA
 
-**Identitas Dokumen:**
-- **Kelompok:** GEN-AI-AJA
-- **Mata Kuliah:** Generative AI (CAK4KBB3)
-- **Topik Proyek:** Conditional GAN Klasik untuk MNIST (angka tulisan tangan 0–9)
-- **Anggota:** Anggota 4 — Muhammad Furqan Maulidi (NIM: 103012330213)
-- **Peran:** Lead Documentarian & Error Handler
+**Anggota 4 — Lead Documentarian & Error Handler**
+
+- **Tanggal Sesi:** 10/11/2026
+- **LLM yang digunakan:** Gemini / Claude
 - **Target Modul:** `docs/log_interaksi.md`, `docs/log_debugging.md`, `README.md`, `docs/laporan_akhir.md`, `.gitignore`, `outputs/`
-- **Rentang Sesi:** 07/11/2026 – 10/11/2026
+- **Tautan Sesi Chat:** [ISI DENGAN SHARE LINK CHAT]
 
 ---
 
