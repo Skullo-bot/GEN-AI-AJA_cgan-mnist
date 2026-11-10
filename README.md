@@ -10,7 +10,7 @@ Model dikembangkan menggunakan paradigma **Vibe Coding from scratch**, berkolabo
 | Peran | Nama Anggota | NIM | Fokus & Tanggung Jawab |
 | :--- | :--- | :--- | :--- |
 | **Anggota 1** | **Dil** | [NIM-1] | Prompt Engineer & LLM Navigator (Arsitektur Model cGAN & Kontrak Kode) |
-| **Anggota 2** | [Nama Anggota 2] | [NIM-2] | Data Pipeline & Preprocessing Engineer (Dataset MNIST & DataLoader) |
+| **Anggota 2** | **MUHAMMAD NAZRIEL IHRAM** | 103012300269 | Data Pipeline & Preprocessing Engineer (Dataset MNIST & DataLoader) |
 | **Anggota 3** | [Nama Anggota 3] | [NIM-3] | Training Loop & Hyperparameter Tuning Engineer (Loss & Optimasi) |
 | **Anggota 4** | [Nama Anggota 4] | [NIM-4] | Lead Documentarian & Error Handler (Log Interaksi, Debugging, & Laporan) |
 
