@@ -107,8 +107,8 @@ python generate.py --checkpoint outputs/checkpoints/smooth_ttur/best.pth --digit
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Baseline** | **0.0002 / 0.0002** | Tidak | 0.2323 | 3.1047 | Discriminator dominan G loss terus membengkak |
 | **Smooth** | **0.0002 / 0.0002** | Ya | 0.3462 | 2.6766 | Menahan Discriminator agar tidak terlalu yakin (overconfident) |
-| **TTUR** | **0.0002 / 0.0001** | Tidak | 1.9799 | 1.9799 | Menyeimbangkan ritme belajar g_loss turun signifikan (−36.2%) |
-| **Smooth + TTUR** | **0.0002 / 0.0001** | Ya | 0.4427 | 0.4427 | Performa paling stabil mendekati ekuilibrium ideal (ln2≈0.693) |
+| **TTUR** | **0.0002 / 0.0001** | Tidak | 0.3783 | 1.9799 | Menyeimbangkan ritme belajar g_loss turun signifikan (−36.2%) |
+| **Smooth + TTUR** | **0.0002 / 0.0001** | Ya | 0.4427 | 1.9862 | Performa paling stabil mendekati ekuilibrium ideal (ln2≈0.693) |
 
 ## 📜 Log Interaksi & Debugging LLM
 Riwayat interaksi dengan LLM, proses penanganan eror mandiri, serta tautan share chat dapat dilihat secara transparan pada folder [docs/](docs/).
