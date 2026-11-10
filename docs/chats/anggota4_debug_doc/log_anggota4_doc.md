@@ -184,13 +184,11 @@ Tanggal: 10/11/2026
 2. Laporan mencakup analisis teoritis kegagalan baseline, pembuktian matematis lower bound Label Smoothing, efektivitas TTUR, serta matriks kontribusi 4 anggota kelompok.
 
 ## REKAPITULASI CAPAIAN ANGGOTA 4 (FURQAN)
-No	Nama Berkas	Status	Keterangan
-0	system_prompt_anggota1_cgan.md	✅ Selesai	Perumusan kontrak awal Anggota 1 berbasis materi kuliah GEN01–GEN07
-1	.gitignore	✅ Selesai	Filter cache Python, venv, dataset mentah, dan file bobot .pth
-2	requirements.txt	✅ Selesai	Dependensi PyTorch, Torchvision, Matplotlib, NumPy, Pandas, tqdm
-3	README.md	✅ Selesai	Identitas kelompok, arsitektur cGAN, dan panduan penggunaan
-4	config.py	✅ Selesai	Kontrak konstanta dimensi tensor, hyperparameter, & path direktori
-5	docs/system_prompt.md	✅ Selesai	Panduan System Prompt terstandarisasi untuk Anggota 1, 2, 3, dan 4
-6	models.py	✅ Selesai	Kelas ConditionalGenerator, ConditionalDiscriminator, & initialize_weights
-7	verify_integration.py	✅ Selesai	Skrip uji cepat integrasi tensor shape dan backward pass lintas modul
-8	generate.py	✅ Selesai	Skrip inferensi kondisional pembangkit citra angka 0–9
+| No | Nama Berkas | Status | Keterangan |
+| :-: | :--- | :---: | :--- |
+| 1 | `docs/log_debugging.md (v1.0 & v2.0)` | ✅ Selesai | Rekam jejak pencatatan eror DBG-01 s.d. DBG-05 & analisis kuantitatif |
+| 2 | `Migrasi & Eksekusi Google Colab` | ✅ Selesai | Mengatasi pemblokiran AppLocker lokal & mengeksekusi 4 eksperimen GPU |
+| 3 | `.gitignore` | ✅ Selesai | Pembaruan aturan outputs/checkpoints/**/*.pth |
+| 4 | `README.md` | ✅ Selesai | Pengisian identitas 4 anggota, panduan CLI bash, & tabel metrik |
+| 5 | `docs/laporan_akhir.md` | ✅ Selesai | Penyusunan Laporan Akhir Tugas Besar cGAN MNIST Bab 1–5 |
+| 6 | `docs/log_interaksi.md` | ✅ Selesai | Kompilasi log interaksi LLM seluruh anggota kelompok (1 s.d. 4) |
