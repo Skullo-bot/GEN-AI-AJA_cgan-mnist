@@ -63,16 +63,17 @@ Pada proyek ini, model cGAN dibangun secara khusus untuk membangkitkan citra sin
 
 ## BAB 3: METODOLOGI PELATIHAN & EXPERIMENTAL DESIGN
 
-Pelatihan dijalankan selama 30 epoch pada setiap eksperimen menggunakan optimizer Adam ($\beta_1 = 0.5$, $\beta_2 = 0.999$). Fungsi loss Discriminator ($D$) dihitung sebagai rata-rata loss citra asli dan citra palsu, yaitu $L_D = 0.5 \times (L_{\text{real}} + L_{\text{fake}})$, dengan titik keseimbangan ideal berada di kisaran $L_D \approx \ln(2) \approx 0.693$.
-
+### 3.1 Desain Eksperimen dan Skema Pelatihan
+Pelatihan dijalankan selama 30 epoch pada setiap eksperimen menggunakan optimizer Adam (beta1 = 0.5, beta2 = 0.999) dan fungsi loss BCEWithLogitsLoss. Nilai loss Discriminator dihitung dari rata-rata loss citra asli dan citra palsu, yaitu L_D = 0.5 * (L_real + L_fake), dengan titik keseimbangan ideal berada di kisaran ln(2) ≈ 0.693.
 Untuk mencari keseimbangan terbaik antara Generator dan Discriminator, dirancang 4 variasi eksperimen:
-
-1. **Baseline (`baseline`):** Learning rate seragam $LR_G = 0.0002, LR_D = 0.0002$ tanpa smoothing.
-2. **Label Smoothing (`smooth`):** Menerapkan _one-sided label smoothing_ (target real $D$ diturunkan dari $1.0$ ke $0.9$).
-3. **Two Time-Scale Update Rule (`ttur`):** Membedakan rasio pembelajaran ($LR_G = 0.0002, LR_D = 0.0001$).
-4. **Kombinasi (`smooth_ttur`):** Menggabungkan _Label Smoothing_ (0.9) dan TTUR ($LR_G = 0.0002, LR_D = 0.0001$).
-
----
+1. **Baseline (baseline):** Learning rate seragam LR_G = 0.0002, LR_D = 0.0002 tanpa smoothing (target label citra real tetap 1.0).
+2. **Label Smoothing (smooth):** Menerapkan one-sided label smoothing, di mana target citra real pada Discriminator diturunkan dari 1.0 ke 0.9 untuk meredam overconfidence.
+3. **Two Time-Scale Update Rule (ttur):** Menggunakan rasio pembelajaran asimetris dengan memperlambat laju Discriminator (LR_G = 0.0002, LR_D = 0.0001).
+4. **Kombinasi (smooth_ttur):** Menggabungkan Label Smoothing (0.9) dan TTUR (LR_G = 0.0002, LR_D = 0.0001) untuk menjaga kestabilan konvergensi kedua jaringan.
+### 3.2 Metodologi Vibe Coding dan Penjaminan Orisinalitas
+Seluruh kode pada proyek ini dikembangkan secara mandiri dari nol (from scratch) bersama Large Language Model (LLM) tanpa menyalin blok kode dari tutorial internet, dengan alur kerja sebagai berikut:
+- **Standarisasi Kontrak Kode (docs/system_prompt.md):** Ketua Kelompok (Anggota 1) menyusun System Prompt untuk mengarahkan AI masing-masing anggota agar seluruh file modul (data.py, models.py, train.py, utils.py) terikat pada konstanta yang sama di config.py, serta diuji kecocokan dimensinya melalui verify_integration.py sebelum digabungkan.
+- **Proses Debugging Mandiri:** Setiap kendala teknis diselesaikan melalui proses konsultasi dan analisis pesan eror bersama LLM, mulai dari penyesuaian dimensi penggabungan label pada Discriminator menjadi [B, 2, 28, 28], pencegahan eror BatchNorm1d menggunakan drop_last=True pada DataLoader, hingga perumusan solusi Two Time-Scale Update Rule (TTUR) dan Label Smoothing untuk mengatasi dominasi Discriminator. Seluruh kronologi prompt dan perbaikan ini dicatat secara transparan pada docs/log_interaksi.md dan docs/log_debugging.md.
 
 ## BAB 4: HASIL DAN ANALISIS
 
